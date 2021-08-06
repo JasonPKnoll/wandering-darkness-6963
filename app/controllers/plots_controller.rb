@@ -4,4 +4,8 @@ class PlotsController < ApplicationController
     @plots = Plot.all
   end
 
+  def delete
+
+  end
+
 end
