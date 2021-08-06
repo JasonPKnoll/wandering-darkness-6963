@@ -8,7 +8,7 @@ RSpec.describe Garden do
       @plot_1 = @garden.plots.create!(number: 25, size: "Large", direction: "East")
       @plot_2 = @garden.plots.create!(number: 20, size: "Medium", direction: "Weast")
       @plot_3 = @garden.plots.create!(number: 15, size: "Small", direction: "Southish")
-      @plot_4 = @garden.plots.create!(number: 15, size: "Small", direction: "Southish")
+      @plot_4 = @garden_2.plots.create!(number: 15, size: "Small", direction: "North")
 
 
       @plant_1 = Plant.create!(name: "Purple Beauty Sweet Bell Pepper", description: "Prefers  rich, well draining soil", days_to_harvest: 90)
@@ -31,16 +31,20 @@ RSpec.describe Garden do
     end
 
     it "can visit the garden" do
-      expect(current_path).to eq(garden_path)
+      expect(current_path).to eq(garden_path(@garden.id))
     end
 
     it 'shows a list of all plants in this garden' do
+      save_and_open_page
+      # Less than 100 days to harvest with no duplicates
       expect(page).to have_content(@plant_1.name)
-      expect(page).to have_content(@plant_2.name)
       expect(page).to have_content(@plant_3.name)
       expect(page).to have_content(@plant_4.name)
       expect(page).to have_content(@plant_5.name)
 
+      # Over 100 days to harvest
+      expect(page).to_not have_content(@plant_2.name)
+        # Apart of Garden 2 not Garden 1
       expect(page).to_not have_content(@plant_6.name)
     end
   end
