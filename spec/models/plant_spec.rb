@@ -28,12 +28,18 @@ RSpec.describe Plant do
       Assignment.create!(plot: @plot_1, plant: @plant_4)
       Assignment.create!(plot: @plot_1, plant: @plant_3)
       Assignment.create!(plot: @plot_2, plant: @plant_2)
+      Assignment.create!(plot: @plot_2, plant: @plant_1)
       Assignment.create!(plot: @plot_2, plant: @plant_5)
+      Assignment.create!(plot: @plot_2, plant: @plant_4)
       Assignment.create!(plot: @plot_3, plant: @plant_4)
       Assignment.create!(plot: @plot_4, plant: @plant_6)
     end
     it "lists all plants with no duplicates and none over 100 days to harvest" do
       expect(@garden.all_plants).to eq([@plant_5.name, @plant_4.name, @plant_1.name, @plant_3.name])
+    end
+
+    it "orders the plants by how often they appear in plots" do
+      expect(@garden.all_plants).to eq([@plant_4.name, @plant_1.name, @plant_5.name, @plant_3.name])
     end
   end
 end

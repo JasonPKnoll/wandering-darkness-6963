@@ -23,7 +23,9 @@ RSpec.describe Garden do
       Assignment.create!(plot: @plot_1, plant: @plant_4)
       Assignment.create!(plot: @plot_1, plant: @plant_3)
       Assignment.create!(plot: @plot_2, plant: @plant_2)
+      Assignment.create!(plot: @plot_2, plant: @plant_1)
       Assignment.create!(plot: @plot_2, plant: @plant_5)
+      Assignment.create!(plot: @plot_2, plant: @plant_4)
       Assignment.create!(plot: @plot_3, plant: @plant_4)
       Assignment.create!(plot: @plot_4, plant: @plant_6)
 
@@ -46,6 +48,12 @@ RSpec.describe Garden do
       expect(page).to_not have_content(@plant_2.name)
         # Apart of Garden 2 not Garden 1
       expect(page).to_not have_content(@plant_6.name)
+    end
+
+    it "orders plants by how often they appear in a garden by plots" do
+      expect(@plant_4.name).to appear_before(@plant_1.name)
+      expect(@plant_1.name).to appear_before(@plant_4.name)
+      expect(@plant_1.name).to appear_before(@plant_5.name)
     end
   end
 end
