@@ -45,5 +45,12 @@ RSpec.describe Plot do
         expect(page).to have_content("#{@plant_4.name}")
       # end
     end
+
+    it "see link to reomve that plant from plot" do
+      click_link "Remove #{@plant_5.name}"
+    end
+
+    it "can remove a plant from a plot"
+
   end
 end
