@@ -31,7 +31,6 @@ RSpec.describe Plot do
     end
 
     it 'shows the name of each plots plants under numbers' do
-      save_and_open_page
       # within "plot-#{@plot_1.number}" do
         expect(page).to have_content("#{@plant_1.name}")
         expect(page).to have_content("#{@plant_4.name}")
@@ -50,7 +49,14 @@ RSpec.describe Plot do
       click_link "Remove #{@plant_5.name}"
     end
 
-    it "can remove a plant from a plot"
+    it "can remove a plant from a plot bbut not delete plant" do
+      click_link "Remove #{@plant_5.name}"
 
+      expect(current_path).to eq("/plots")
+
+      expect(page).to_not have_content("#{@plant_5.name}")
+      expect(Plant.fifth).to eq(@plant_5)
+      require "pry"; binding.pry
+    end
   end
 end
