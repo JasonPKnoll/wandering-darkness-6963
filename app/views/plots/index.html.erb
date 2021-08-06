@@ -1,8 +1,9 @@
+
 <h1>View of all Plots</h1>
 
 <h2> <% @plots.each do |plot| %> </h2>
   <div id="plot-<%=plot.number%>">
-  <%= plot.number %> <br>
+  Plot: <%= plot.number %> <br>
   <% plot.plants.each do |plant| %>
     <%= plant.name %> <%= link_to "Remove #{plant.name}", plant_path(id: plant , plot_id: plot), method: :delete %><br>
   <% end %>

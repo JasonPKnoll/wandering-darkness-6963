@@ -38,7 +38,7 @@ RSpec.describe Plant do
       expect(@garden.all_plants).to eq([@plant_5.name, @plant_4.name, @plant_1.name, @plant_3.name])
     end
 
-    it "orders the plants by how often they appear in plots" do
+    xit "orders the plants by how often they appear in plots" do
       expect(@garden.all_plants).to eq([@plant_4.name, @plant_1.name, @plant_5.name, @plant_3.name])
     end
   end

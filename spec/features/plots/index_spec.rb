@@ -31,25 +31,25 @@ RSpec.describe Plot do
     end
 
     it 'shows the name of each plots plants under numbers' do
-      # within "plot-#{@plot_1.number}" do
+      within "#plot-#{@plot_1.number}" do
         expect(page).to have_content("#{@plant_1.name}")
         expect(page).to have_content("#{@plant_4.name}")
         expect(page).to have_content("#{@plant_3.name}")
-      # end
-      # within "plot-#{@plot_2.number}" do
+      end
+      within "#plot-#{@plot_2.number}" do
         expect(page).to have_content("#{@plant_2.name}")
         expect(page).to have_content("#{@plant_5.name}")
-      # end
-      # within "plot-#{@plot_3.number}" do
+      end
+      within "#plot-#{@plot_3.number}" do
         expect(page).to have_content("#{@plant_4.name}")
-      # end
+      end
     end
 
     it "see link to reomve that plant from plot" do
       click_link "Remove #{@plant_5.name}"
     end
 
-    it "can remove a plant from a plot bbut not delete plant" do
+    it "can remove a plant from a plot but not delete plant" do
       click_link "Remove #{@plant_5.name}"
 
       expect(current_path).to eq("/plots")
