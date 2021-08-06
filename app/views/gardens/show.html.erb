@@ -1,0 +1,6 @@
+<h1>Welcome to <%= @garden.name %>!</h1>
+
+<h2>Here are all our plants that are Quick to Harvest:</h2>
+<% @garden.all_plants.each do |plant| %>
+  <%= plant %><br>
+<% end %>
