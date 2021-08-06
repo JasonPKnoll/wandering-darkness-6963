@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe Plots do
+RSpec.describe Plot do
   describe 'plots index page' do
     before(:each) do
       @garden = Garden.create!(name: "Turing Comunity Garden", organic: true)
-      @plot_1 = Plot.create!(number: 25, size: "Large", direction: "East")
-      @plot_2 = Plot.create!(number: 20, size: "Medium", direction: "Weast")
-      @plot_3 = Plot.create!(number: 15, size: "Small", direction: "Southish")
+      @plot_1 = @garden.plots.create!(number: 25, size: "Large", direction: "East")
+      @plot_2 = @garden.plots.create!(number: 20, size: "Medium", direction: "Weast")
+      @plot_3 = @garden.plots.create!(number: 15, size: "Small", direction: "Southish")
 
       @plant_1 = Plant.create!(name: "Purple Beauty Sweet Bell Pepper", description: "Prefers  rich, well draining soil", days_to_harvest: 90)
       @plant_2 = Plant.create!(name: "White Lotus", description: "Extreamly Rare", days_to_harvest: 365)
@@ -30,19 +30,20 @@ RSpec.describe Plots do
       expect(page).to have_content("15")
     end
 
-    it 'shows the name of each plot plant under numbers' do
-      within "#plot-#{@plot_1.id}" do
+    it 'shows the name of each plots plants under numbers' do
+      save_and_open_page
+      # within "plot-#{@plot_1.number}" do
         expect(page).to have_content("#{@plant_1.name}")
         expect(page).to have_content("#{@plant_4.name}")
         expect(page).to have_content("#{@plant_3.name}")
-      end
-      within "#plot-#{@plot_2.id}" do
+      # end
+      # within "plot-#{@plot_2.number}" do
         expect(page).to have_content("#{@plant_2.name}")
         expect(page).to have_content("#{@plant_5.name}")
-      end
-      within "#plot-#{@plot_3.id}" do
+      # end
+      # within "plot-#{@plot_3.number}" do
         expect(page).to have_content("#{@plant_4.name}")
-      end
+      # end
     end
   end
 end
